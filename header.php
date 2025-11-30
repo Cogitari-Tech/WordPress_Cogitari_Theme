@@ -1,16 +1,16 @@
 <?php
 /**
- * Header do Tema Cogitari Tec - v5.0 REFATORADO
+ * Header do Tema Cogitari Tec - v5.1 FIXED
  * 
- * NOVIDADES v5.0:
- * - ✅ Logo personalizada integrada
- * - ✅ Glassmorphism Midnight otimizado
- * - ✅ Navegação responsiva mobile-first
- * - ✅ Background orbs animados
- * - ✅ Breadcrumbs integrados
+ * CORREÇÕES v5.1:
+ * - ✅ Logo renderiza corretamente (custom ou padrão SVG)
+ * - ✅ Estrutura semântica HTML5 melhorada
+ * - ✅ Menu mobile funcional
+ * - ✅ Breadcrumbs otimizados
+ * - ✅ Classes CSS consolidadas
  * 
  * @package Cogitari_Tec
- * @since 5.0.0
+ * @since 5.1.0
  */
 
 if (!defined('ABSPATH')) {
@@ -24,23 +24,21 @@ if (!defined('ABSPATH')) {
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     
-    <!-- ============================================
-         PERFORMANCE OPTIMIZATION
-    ============================================ -->
+    <!-- Performance Optimization -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="dns-prefetch" href="//pagead2.googlesyndication.com">
-    <link rel="dns-prefetch" href="//www.googletagmanager.com">
     
     <!-- Theme Color -->
     <meta name="theme-color" content="#020511">
-    <meta name="msapplication-TileColor" content="#2F80ED">
     
-    <!-- Open Graph -->
+    <!-- Open Graph (Para Single Posts) -->
     <?php if (is_single()) : ?>
         <meta property="og:title" content="<?php the_title(); ?>">
         <meta property="og:description" content="<?php echo wp_trim_words(get_the_excerpt(), 30); ?>">
-        <meta property="og:image" content="<?php echo get_the_post_thumbnail_url(get_the_ID(), 'cogitari-featured'); ?>">
+        <?php if (has_post_thumbnail()) : ?>
+            <meta property="og:image" content="<?php echo get_the_post_thumbnail_url(get_the_ID(), 'cogitari-featured'); ?>">
+        <?php endif; ?>
         <meta property="og:url" content="<?php the_permalink(); ?>">
         <meta property="og:type" content="article">
     <?php endif; ?>
@@ -51,45 +49,45 @@ if (!defined('ABSPATH')) {
 <body <?php body_class(); ?>>
 <?php wp_body_open(); ?>
 
-<!-- Background Orbs (Glassmorphism Effect) -->
+<!-- Background Orbs (Glassmorphism Effect) - CORRIGIDO -->
 <div class="orb orb-1" aria-hidden="true"></div>
 <div class="orb orb-2" aria-hidden="true"></div>
 <div class="orb orb-3" aria-hidden="true"></div>
 
 <div id="page" class="site">
-    <!-- Skip Link -->
+    <!-- Skip Link (Acessibilidade) -->
     <a class="skip-link screen-reader-text" href="#primary">
         <?php esc_html_e('Pular para o conteúdo', 'cogitari-tec'); ?>
     </a>
 
     <!-- ============================================
-         HEADER GLASSMORPHISM STICKY
+         HEADER GLASSMORPHISM STICKY - CORRIGIDO
     ============================================ -->
-    <header id="masthead" class="glass-header fixed top-0 left-0 right-0 z-50" role="banner">
-        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="header-inner flex items-center justify-between h-16 md:h-20">
+    <header id="masthead" class="site-header glass-header" role="banner">
+        <div class="container">
+            <div class="header-inner">
                 
                 <!-- ============================================
-                     LOGO / BRANDING COM NOVA IDENTIDADE
+                     LOGO / BRANDING - RENDERIZAÇÃO CORRIGIDA
                 ============================================ -->
-                <div class="site-branding flex items-center gap-2 md:gap-4">
+                <div class="site-branding">
                     <?php if (has_custom_logo()) : ?>
-                        <!-- Logo Customizada -->
+                        <!-- Logo Customizada (Prioridade 1) -->
                         <div class="custom-logo-wrapper">
                             <?php the_custom_logo(); ?>
                         </div>
                     <?php else : ?>
-                        <!-- Logo Padrão Cogitari (Gradiente) -->
-                        <div class="logo-default flex items-center gap-2">
-                            <svg width="40" height="40" viewBox="0 0 512 512" class="logo-icon" aria-hidden="true">
-                                <!-- Logo Cogitari: Face com < > (Code) -->
+                        <!-- Logo Padrão SVG Cogitari (Prioridade 2) -->
+                        <div class="logo-default">
+                            <!-- SVG Logo Cogitari (Face Tech com < >) -->
+                            <svg class="logo-icon" viewBox="0 0 512 512" aria-hidden="true">
                                 <defs>
                                     <linearGradient id="logoGrad" x1="0%" y1="0%" x2="0%" y2="100%">
                                         <stop offset="0%" style="stop-color:#7B42F6;stop-opacity:1" />
                                         <stop offset="100%" style="stop-color:#2F80ED;stop-opacity:1" />
                                     </linearGradient>
                                 </defs>
-                                <!-- Forma Externa (Cara com orelhas) -->
+                                <!-- Forma Externa (Face com "orelhas") -->
                                 <path d="M256 32c-88 0-160 72-160 160v64c0 88 72 160 160 160s160-72 160-160v-64c0-88-72-160-160-160z" fill="url(#logoGrad)" stroke="none"/>
                                 <!-- Olhos (Círculos brancos) -->
                                 <circle cx="196" cy="300" r="40" fill="white"/>
@@ -101,8 +99,9 @@ if (!defined('ABSPATH')) {
                         </div>
                     <?php endif; ?>
 
+                    <!-- Nome do Site e Slogan -->
                     <div class="brand-text">
-                        <h1 class="site-title text-2xl md:text-3xl font-bold gradient-text m-0">
+                        <h1 class="site-title">
                             <a href="<?php echo esc_url(home_url('/')); ?>" rel="home">
                                 <?php 
                                 $site_name = get_bloginfo('name');
@@ -115,18 +114,19 @@ if (!defined('ABSPATH')) {
                         $slogan = get_theme_mod('cogitari_slogan', 'Tecnologia e Automações');
                         if ($slogan) :
                         ?>
-                            <p class="site-slogan hidden md:block text-xs text-slate-400 uppercase tracking-wider m-0">
+                            <p class="site-slogan">
                                 <?php echo esc_html($slogan); ?>
                             </p>
                         <?php endif; ?>
                     </div>
 
-                    <!-- Breadcrumbs Desktop (após logo) -->
+                    <!-- Breadcrumbs Desktop (Escondido no Mobile) -->
                     <?php if (!is_front_page() && !is_home()) : ?>
                         <div class="hidden lg:flex items-center text-sm text-gray-500 space-x-2 ml-6 border-l border-white/10 pl-6 h-8">
                             <a href="<?php echo home_url(); ?>" class="hover:text-white transition-colors">
                                 <?php esc_html_e('Início', 'cogitari-tec'); ?>
                             </a>
+                            
                             <?php if (is_single()) : ?>
                                 <span class="text-gray-600">/</span>
                                 <?php
@@ -137,9 +137,14 @@ if (!defined('ABSPATH')) {
                                         <?php echo esc_html($categories[0]->name); ?>
                                     </a>
                                 <?php endif; ?>
+                                
                             <?php elseif (is_page()) : ?>
                                 <span class="text-gray-600">/</span>
                                 <span class="text-white"><?php the_title(); ?></span>
+                                
+                            <?php elseif (is_category()) : ?>
+                                <span class="text-gray-600">/</span>
+                                <span class="text-white"><?php single_cat_title(); ?></span>
                             <?php endif; ?>
                         </div>
                     <?php endif; ?>

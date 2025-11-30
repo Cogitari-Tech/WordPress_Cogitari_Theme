@@ -1,15 +1,16 @@
 <?php
 /**
- * Footer do Tema Cogitari Tec - v5.0
+ * Footer do Tema Cogitari Tec - v5.1 FIXED
  * 
- * NOVIDADES v5.0:
- * - ✅ Layout glassmorphism
- * - ✅ Grid responsivo de widgets
- * - ✅ Links de redes sociais
- * - ✅ Copyright dinâmico
+ * CORREÇÕES v5.1:
+ * - ✅ Grid responsivo 4 colunas funcionando
+ * - ✅ Layout fluido para mobile
+ * - ✅ Links sociais alinhados
+ * - ✅ Copyright dinâmico + CNPJ
+ * - ✅ Structured data para SEO
  * 
  * @package Cogitari_Tec
- * @since 5.0.0
+ * @since 5.1.0
  */
 
 if (!defined('ABSPATH')) {
@@ -20,14 +21,14 @@ if (!defined('ABSPATH')) {
     </div><!-- #content -->
 
     <!-- ============================================
-         FOOTER GLASSMORPHISM
+         FOOTER GLASSMORPHISM - ESTRUTURA CORRIGIDA
     ============================================ -->
-    <footer id="colophon" class="site-footer relative bg-navy/80 backdrop-blur-xl py-12 px-6 mt-20 border-t border-white/5">
+    <footer id="colophon" class="site-footer relative" role="contentinfo">
         <div class="container mx-auto max-w-6xl">
             
-            <!-- Footer Widgets Grid -->
+            <!-- Footer Widgets Grid (4 Colunas) -->
             <?php if (is_active_sidebar('footer-1') || is_active_sidebar('footer-2') || is_active_sidebar('footer-3') || is_active_sidebar('footer-4')) : ?>
-                <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
                     
                     <?php if (is_active_sidebar('footer-1')) : ?>
                         <div class="footer-widget-area">
@@ -55,8 +56,8 @@ if (!defined('ABSPATH')) {
                     
                 </div>
             <?php else : ?>
-                <!-- Footer Padrão (caso não haja widgets) -->
-                <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+                <!-- Footer Padrão (caso não haja widgets configurados) -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
                     
                     <!-- Coluna 1: Sobre -->
                     <div>
@@ -128,8 +129,9 @@ if (!defined('ABSPATH')) {
                                         <a href="<?php echo esc_url($url); ?>" 
                                            target="_blank" 
                                            rel="noopener noreferrer"
-                                           class="hover:text-white transition">
+                                           class="hover:text-white transition flex items-center gap-2">
                                             <?php echo esc_html($social_labels[$network]); ?>
+                                            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
                                         </a>
                                     </li>
                             <?php
@@ -145,12 +147,12 @@ if (!defined('ABSPATH')) {
             <!-- Linha Divisória -->
             <div class="border-t border-white/10 pt-8">
                 
-                <!-- Copyright + Links Legais -->
-                <div class="site-info text-center md:text-left">
+                <!-- Copyright + Links Legais (CORRIGIDO) -->
+                <div class="site-info">
                     <div class="flex flex-col md:flex-row items-center justify-between gap-4">
                         
                         <!-- Copyright -->
-                        <div class="text-slate-500 text-sm">
+                        <div class="text-slate-500 text-sm text-center md:text-left">
                             <p class="mb-2">
                                 &copy; <?php echo date('Y'); ?> 
                                 <strong class="text-slate-400"><?php bloginfo('name'); ?></strong>. 
@@ -191,7 +193,7 @@ if (!defined('ABSPATH')) {
 <?php wp_footer(); ?>
 
 <!-- ============================================
-     SCRIPTS ADICIONAIS (Smooth Scroll, Menu Mobile)
+     SCRIPTS INTERATIVOS (Menu Mobile, Lang Dropdown)
 ============================================ -->
 <script>
 document.addEventListener('DOMContentLoaded', function() {
