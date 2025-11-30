@@ -1,0 +1,47 @@
+ # WordPress Core
+/wp-admin/
+/wp-includes/
+wp-*.php
+xmlrpc.php
+/license.txt
+/readme.html
+
+# Configurações
+wp-config.php
+.htaccess
+
+# Node Modules (se usar npm)
+node_modules/
+package-lock.json
+
+# Dependências
+/vendor/
+composer.lock
+
+# Arquivos de Sistema
+.DS_Store
+Thumbs.db
+*.log
+*.swp
+*.swo
+*~
+
+# IDEs
+.vscode/
+.idea/
+*.sublime-*
+
+# Arquivos Temporários
+*.tmp
+*.bak
+*.cache
+
+# Uploads (não versionar imagens de usuários)
+/wp-content/uploads/
+
+# Plugins (opcional, versione apenas se customizou)
+# /wp-content/plugins/
+
+# Cache
+/wp-content/cache/
+/wp-content/w3tc-config/
