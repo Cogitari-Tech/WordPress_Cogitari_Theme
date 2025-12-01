@@ -1,60 +1,88 @@
-# 🚀 Tema Cogitari Tec v5.1 HYBRID - WordPress Proprietário
+# 🚀 Tema Cogitari v17.0 FINAL - WordPress Proprietário
 
 ## 📋 Visão Geral
 
-Tema WordPress profissional desenvolvido para o portal de notícias **Cogitari Tec**, focado em Automação, Inteligência Artificial e Marketing Digital.
+Tema WordPress profissional desenvolvido para o portal de notícias **Cogitari**, focado em Automação, Inteligência Artificial e Marketing Digital.
 
-### ✨ Novidades v5.1 HYBRID
+### ✨ Características v17.0 FINAL
 
-- ✅ **WooCommerce Ready**: Suporte total para e-commerce
-- ✅ **Estilos WooCommerce Midnight**: Sobrescrita completa de cores roxas para azul/roxo da marca
-- ✅ **Elementor Avançado**: Hooks específicos para header/footer customizados
-- ✅ **Containers Fluidos**: Detecção automática de page builders
-- ✅ **Templates Base**: archive.php e page.php com compatibilidade híbrida
-
-### 🎯 Características Principais v5.0
-
-- ✅ **Glassmorphism Midnight**: Design moderno com efeitos de vidro e gradientes
-- ✅ **Totalmente Editável com Elementor**: Header, Footer e templates customizáveis
-- ✅ **SEO Otimizado**: HTML5 semântico, Schema.org, Core Web Vitals
-- ✅ **AdSense Ready**: 5 áreas de widget estratégicas para monetização
-- ✅ **Responsivo Mobile-First**: Design adaptável para todos os dispositivos
+- ✅ **Design Glassmorphism Midnight**: Visual futurista com efeitos de vidro e gradientes azul→roxo
+- ✅ **100% Responsivo**: Mobile-first design adaptável para todos os dispositivos
+- ✅ **SEO Otimizado**: HTML5 semântico, Core Web Vitals otimizado
+- ✅ **Sistema de Comentários Avançado**: Rating com estrelas e layout moderno
+- ✅ **Performance**: Lazy loading, preconnect, CSS otimizado
 - ✅ **Internacionalização (i18n)**: Preparado para tradução em múltiplos idiomas
-- ✅ **Performance**: Lazy loading, preconnect, otimização de assets
+- ✅ **Segurança**: Headers de segurança, nonces, sanitização completa
+
+### 🎯 Compatibilidade Futura (Preparado para expansão)
+
+O tema está estruturado para suportar:
+- **Elementor**: Hooks preparados para header/footer customizados (requer configuração adicional)
+- **WooCommerce**: Estrutura pronta para e-commerce (requer ativação de módulos)
+- **AdSense**: Espaços estratégicos para monetização já definidos
+
+---
+
+## 🎨 Design System Cogitari
+
+### Paleta de Cores (Variáveis CSS)
+
+```css
+:root {
+    /* Backgrounds */
+    --bg-void: #020511;              /* Midnight Void */
+    --bg-navy: #050A25;              /* Deep Navy */
+    --card-bg: #0B0E1E;              /* Card Background */
+    
+    /* Textos */
+    --text-white: #FFFFFF;           /* Pure White */
+    --text-grey: #94A3B8;            /* Cool Grey */
+    
+    /* Gradientes da Marca */
+    --color-blue: #2F80ED;           /* Electric Blue */
+    --color-purple: #7B42F6;         /* Vivid Purple */
+    --grad-main: linear-gradient(135deg, #2F80ED 0%, #7B42F6 100%);
+}
+```
+
+### Tipografia
+
+- **Display (Títulos)**: Inter (Google Fonts) - Peso 800
+- **Body (Textos)**: Inter (Google Fonts) - Peso 300-600
+- **Ícones**: Phosphor Icons (CDN)
+
+### Espaçamentos (Scale 8px)
+
+```css
+--space-xs: 0.5rem;    /* 8px */
+--space-sm: 1rem;      /* 16px */
+--space-md: 1.5rem;    /* 24px */
+--space-lg: 2rem;      /* 32px */
+--space-xl: 3rem;      /* 48px */
+```
 
 ---
 
 ## 📂 Estrutura do Tema (Atualizada)
 
 ```
-cogitari-tec/
-├── style.css                    # CSS principal com variáveis do Design System
-├── functions.php                # v5.1 - WooCommerce + Elementor
+cogitari/
+│
+├── style.css                    # CSS principal com Design System
+├── functions.php                # v17.0 - Setup completo do tema
 ├── header.php                   # Cabeçalho glassmorphism + navegação
 ├── footer.php                   # Rodapé com widgets e redes sociais
-├── index.php                    # Loop padrão de posts
-├── front-page.php               # Home page (portal de notícias)
+├── index.php                    # Loop padrão de posts (Home)
 ├── single.php                   # Template de post individual
-├── page.php                     # ✅ NOVO - Template de página padrão
-├── archive.php                  # ✅ NOVO - Template de arquivo
-├── comments.php                 # Sistema de comentários
-├── /woocommerce/
-│   └── woocommerce.css          # ✅ NOVO - Sobrescrita Midnight
-├── /template-parts/
-│   ├── content.php              # Card de post
-│   ├── content-none.php         # Sem resultados
-│   └── content-featured.php     # Post em destaque
-├── /inc/
-│   ├── template-tags.php        # Funções auxiliares
-│   ├── customizer.php           # Opções do Customizer
-│   ├── elementor-compatibility.php  # Integração Elementor
-│   └── woocommerce-hooks.php    # ✅ NOVO - Hooks WooCommerce
-├── /js/
-│   ├── navigation.js            # Menu mobile
-│   ├── i18n.js                  # Sistema de idiomas
-│   └── smooth-scroll.js         # Scroll suave
-├── /languages/
-│   └── cogitari-tec.pot         # Arquivo de tradução
+├── comments.php                 # Sistema de comentários com rating
+├── page-cadastro.php            # Template customizado de cadastro
+│
+├── assets/
+│   └── images/
+│       ├── cogitarilogo.png     # Logo ícone (55x55px)
+│       ├── cogitariwordmark.png # Wordmark (200x50px)
+│       └── hero-bg.jpg          # Background hero section
+│
 └── screenshot.png               # Preview do tema (1200x900px)
 ```
 
@@ -66,274 +94,187 @@ cogitari-tec/
 
 - WordPress 5.0+
 - PHP 7.4+
-- Elementor Free ou Pro (recomendado)
-- WooCommerce 5.0+ (opcional, mas preparado)
 - MySQL 5.6+
+- Hospedagem: Hostinger (recomendado)
 
-### Passo a Passo
+### Passo a Passo (Windows + PowerShell)
 
-1. **Baixar o Tema**
-   ```bash
-   cd wp-content/themes/
-   git clone https://github.com/seu-usuario/cogitari-tec.git
-   ```
+#### 1. Download e Preparação
 
-2. **Ativar no WordPress**
-   - Acesse: `Painel WordPress > Aparência > Temas`
-   - Clique em "Ativar" no tema Cogitari Tec
+```powershell
+# Navegue até a pasta de temas do WordPress
+cd C:\caminho\para\wordpress\wp-content\themes\
 
-3. **Configurar Logo**
-   - Acesse: `Painel > Aparência > Personalizar > Identidade do Site`
-   - Faça upload da logo (recomendado: 320x80px, formato SVG ou PNG transparente)
+# Crie a pasta do tema
+New-Item -ItemType Directory -Name "cogitari"
+cd cogitari
+```
 
-4. **Criar Menus**
-   - Acesse: `Painel > Aparência > Menus`
-   - Crie um menu e atribua à localização "Menu Principal"
+#### 2. Adicionar Arquivos do Tema
 
-5. **Configurar Widgets AdSense**
-   - Acesse: `Painel > Aparência > Widgets`
-   - Adicione código AdSense nas áreas:
-     - `AdSense - Topo` (728x90 ou 970x90)
-     - `AdSense - Feed` (300x250 Native Ads)
-     - `AdSense - Sidebar` (336x280)
-     - `AdSense - Skyscraper` (160x600)
-     - `AdSense - Dentro do Artigo` (Responsivo)
+Copie todos os arquivos PHP e CSS para a pasta `cogitari/`:
+- `style.css`
+- `functions.php`
+- `header.php`
+- `footer.php`
+- `index.php`
+- `single.php`
+- `comments.php`
+- `page-cadastro.php`
 
-6. **🆕 Ativar WooCommerce (Opcional)**
-   - Instale o plugin WooCommerce
-   - Ao ativar, o tema detectará automaticamente e aplicará os estilos Midnight
-   - Acesse: `WooCommerce > Configurações` para setup inicial
+#### 3. Criar Estrutura de Assets
+
+```powershell
+# Criar pasta de imagens
+New-Item -ItemType Directory -Path "assets\images"
+```
+
+**IMPORTANTE - Imagens da Logo:**
+
+Você tem duas opções para adicionar as imagens:
+
+**Opção A (Recomendada): Hardcoded no Tema**
+1. Adicione as imagens na pasta `assets/images/`:
+   - `cogitarilogo.png` (ícone 55x55px)
+   - `cogitariwordmark.png` (wordmark 200x50px)
+   - `hero-bg.jpg` (hero background 1920x1080px)
+
+**Opção B: Upload pelo WordPress**
+1. Ative o tema sem as imagens
+2. Vá em **Aparência > Personalizar > Identidade do Site**
+3. Faça upload da logo customizada
+
+#### 4. Zipar o Tema (Para upload via WordPress)
+
+```powershell
+# Volte para a pasta themes
+cd ..
+
+# Comprima a pasta cogitari
+Compress-Archive -Path cogitari -DestinationPath cogitari.zip
+```
+
+#### 5. Ativar no WordPress
+
+**Se instalou diretamente na pasta:**
+1. Acesse: `Painel WordPress > Aparência > Temas`
+2. Clique em "Ativar" no tema Cogitari
+
+**Se vai fazer upload do ZIP:**
+1. Acesse: `Painel WordPress > Aparência > Temas`
+2. Clique em "Adicionar Novo" > "Enviar Tema"
+3. Selecione `cogitari.zip`
+4. Clique em "Instalar Agora" > "Ativar"
+
+#### 6. Configurar Logo (Se não usou hardcoded)
+
+1. Acesse: `Painel > Aparência > Personalizar > Identidade do Site`
+2. Faça upload da logo (recomendado: 320x80px, formato PNG transparente)
+
+#### 7. Criar Menus
+
+1. Acesse: `Painel > Aparência > Menus`
+2. Crie um menu chamado "Menu Principal"
+3. Adicione itens:
+   - Home
+   - IA (link para `/category/ia/`)
+   - Automação (link para `/category/automacao/`)
+   - Marketing (link para `/category/marketing/`)
+   - Ferramentas (link para `/category/ferramentas/`)
+4. Atribua à localização "Menu Principal"
+
+#### 8. Limpar Cache (LiteSpeed Cache)
+
+1. No painel do WordPress, vá em **LiteSpeed Cache**
+2. Clique em **Purge All** (Limpar Tudo)
+3. Ou use `Ctrl + F5` no navegador para hard refresh
 
 ---
 
-## 🎨 Design System Cogitari
+## 🎨 Identidade Visual (Logo)
 
-### Cores (Variáveis CSS)
+### Descrição Técnica da Logo
 
-```css
-:root {
-    /* Backgrounds */
-    --bg-main: #020511;              /* Midnight Void */
-    --bg-card: #050A25;              /* Deep Navy */
-    --bg-elevated: #0A1245;          /* Elevated surface */
-    
-    /* Textos */
-    --text-title: #FFFFFF;           /* Pure White */
-    --text-body: #E2E8F0;            /* Cool Grey */
-    --text-secondary: #94A3B8;       /* Muted Grey */
-    
-    /* Gradientes */
-    --gradient-start: #2F80ED;       /* Electric Blue */
-    --gradient-end: #7B42F6;         /* Vivid Purple */
-    --brand-gradient: linear-gradient(90deg, #2F80ED 0%, #7B42F6 100%);
-}
-```
+**Ícone (cogitarilogo.png):**
+- Formato: Círculo/Quadrado arredondado
+- Dimensões: 55x55px (mínimo) ou 200x200px (alta resolução)
+- Background: Gradiente vertical
+  - Topo: `#7B42F6` (Vivid Purple)
+  - Base: `#2F80ED` (Electric Blue)
+- Elementos Internos (Branco `#FFFFFF`):
+  - Dois círculos grandes (olhos)
+  - Símbolo `< >` estilizado acima (código/tech)
+  - Queixo em "V" suave na parte inferior
 
-### Tipografia
-
-- **Display (Títulos)**: Space Grotesk (Google Fonts)
-- **Body (Textos)**: Outfit (Google Fonts)
-- **Monospace (Código)**: JetBrains Mono
-
-### Espaçamentos (Scale 8px)
-
-```css
---space-xs: 0.5rem;    /* 8px */
---space-sm: 1rem;      /* 16px */
---space-md: 1.5rem;    /* 24px */
---space-lg: 2rem;      /* 32px */
---space-xl: 3rem;      /* 48px */
---space-2xl: 4rem;     /* 64px */
-```
+**Wordmark (cogitariwordmark.png):**
+- Texto: "COGITARI"
+- Fonte: Inter ExtraBold (peso 800) ou similar
+- Cor: Branco `#FFFFFF`
+- Dimensões: 200x50px
+- Background: Transparente
 
 ---
 
-## 🎯 Como Editar com Elementor
+## ⚙️ Configuração Pós-Instalação
 
-### 1. Header Customizado
+### 1. Criar Categorias
 
-```php
-// No functions.php, o suporte já está ativado:
-add_theme_support('elementor-header-footer');
-```
+Acesse: `Painel > Posts > Categorias`
 
-**Criar Header no Elementor:**
-1. Acesse: `Elementor > Templates > Theme Builder`
-2. Adicione novo > Header
-3. Desenhe seu header personalizado
-4. Defina condições de exibição: "Entire Site"
-5. Publique
+Criar as seguintes categorias:
+- **IA** (slug: `ia`)
+- **Automação** (slug: `automacao`)
+- **Marketing** (slug: `marketing`)
+- **Ferramentas** (slug: `ferramentas`)
 
-**Resultado**: O header padrão do tema será automaticamente desativado.
+### 2. Criar Posts de Teste
 
-### 2. Footer Customizado
+Acesse: `Painel > Posts > Adicionar Novo`
 
-Mesmo processo do Header, mas selecionando "Footer" no Theme Builder.
+Crie pelo menos 6 posts com:
+- Título descritivo
+- Imagem destacada (1200x675px)
+- Categoria atribuída
+- Conteúdo com pelo menos 3 parágrafos
 
-### 3. Templates de Arquivo (Archive, Single)
+### 3. Configurar Página de Cadastro (Opcional)
 
-- **Archive.php**: Crie template "Archive" no Elementor
-- **Single.php**: Crie template "Single Post" no Elementor
-- Defina condições específicas (categoria, tag, etc.)
-
-### 4. Páginas com Elementor
-
-O tema detecta automaticamente se a página está usando Elementor e ajusta o container:
-
-```php
-// Detecção automática no page.php
-$is_elementor = get_post_meta(get_the_ID(), '_elementor_edit_mode', true);
-
-if ($is_elementor === 'builder') :
-    // Container fluido sem estilos extras
-else :
-    // Container padrão com glassmorphism
-endif;
-```
-
----
-
-## 🛒 WooCommerce: Configuração Completa
-
-### Ativação Automática
-
-Ao instalar o WooCommerce, o tema:
-1. ✅ Ativa suporte automático
-2. ✅ Carrega `woocommerce.css` com estilos Midnight
-3. ✅ Sobrescreve cores roxas padrão para azul/roxo da marca
-4. ✅ Adiciona sidebar específica para loja
-
-### Estilos Customizados
-
-O arquivo `/woocommerce/woocommerce.css` sobrescreve:
-
-- **Botões**: Gradiente azul→roxo (`#2F80ED → #7B42F6`)
-- **Inputs**: Fundo glassmorphism com bordas sutis
-- **Cards de Produto**: Efeito hover com elevação
-- **Alertas**: Cores da marca (verde sucesso, vermelho erro)
-- **Checkout**: Layout limpo e moderno
-- **Rating**: Estrelas douradas (`#F59E0B`)
-
-### Layouts Otimizados
-
-```php
-// Produtos por página
-add_filter('loop_shop_per_page', function() {
-    return 12; // Divisível por 3 e 4
-}, 20);
-
-// Colunas de produtos
-add_filter('loop_shop_columns', function() {
-    return 3; // Desktop
-});
-```
-
-### Sidebar WooCommerce
-
-Área de widget específica para loja:
-
-```php
-// Acesse: Painel > Aparência > Widgets
-// Procure por: "Sidebar WooCommerce"
-```
-
-Adicione widgets como:
-- Filtro de preço
-- Categorias
-- Tags de produto
-- Produtos em destaque
-
----
-
-## 💰 Configuração de AdSense
-
-### Código Recomendado para Widgets
-
-#### 1. Topo (Leaderboard 728x90)
-```html
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXX"
-     crossorigin="anonymous"></script>
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-XXXXXXXX"
-     data-ad-slot="1234567890"
-     data-ad-format="auto"
-     data-full-width-responsive="true"></ins>
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-```
-
-#### 2. Feed/Sidebar (Rectangle 300x250)
-```html
-<ins class="adsbygoogle"
-     style="display:inline-block;width:300px;height:250px"
-     data-ad-client="ca-pub-XXXXXXXX"
-     data-ad-slot="0987654321"></ins>
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-```
-
-### Melhores Práticas
-
-- ✅ Use no máximo 3 anúncios por página para não prejudicar UX
-- ✅ Posicione após 2º parágrafo no conteúdo (já configurado no `single.php`)
-- ✅ Mantenha anúncios acima da dobra (above the fold)
-- ✅ Use anúncios responsivos para mobile
-
----
-
-## 🌐 Internacionalização (i18n)
-
-### Adicionar Novo Idioma
-
-1. **Gerar arquivo .pot**
-   ```bash
-   cd wp-content/themes/cogitari-tec
-   wp i18n make-pot . languages/cogitari-tec.pot
-   ```
-
-2. **Traduzir com Poedit**
-   - Abra `languages/cogitari-tec.pot` no [Poedit](https://poedit.net/)
-   - Traduza as strings
-   - Salve como `cogitari-tec-pt_BR.po` (exemplo para Português)
-
-3. **Adicionar ao Sistema**
-   - O WordPress automaticamente detectará os arquivos `.mo` gerados
-
-### Strings Traduzíveis no JS
-
-No arquivo `js/i18n.js`, adicione novos textos ao objeto `translations`:
-
-```javascript
-const translations = {
-    pt_BR: {
-        novo_texto: 'Meu texto em português',
-    },
-    en_US: {
-        novo_texto: 'My text in English',
-    },
-};
-```
+1. Acesse: `Painel > Páginas > Adicionar Nova`
+2. Título: "Cadastro"
+3. Template: Selecione "Página de Cadastro"
+4. Publique
 
 ---
 
 ## 🔧 Customização Avançada
 
-### 1. Adicionar Nova Área de Widget
+### 1. Alterar Cores do Design System
+
+Edite o arquivo `style.css` (linhas 11-22):
+
+```css
+:root {
+    --bg-void: #020511;      /* Fundo principal */
+    --color-blue: #2F80ED;   /* Azul da marca */
+    --color-purple: #7B42F6; /* Roxo da marca */
+}
+```
+
+### 2. Adicionar Nova Área de Widget (Futuro AdSense)
+
+Edite `functions.php`, adicione após a linha 45:
 
 ```php
-// No functions.php:
+// Registrar nova sidebar
 register_sidebar(array(
     'name'          => 'Minha Nova Área',
     'id'            => 'minha-area',
-    'before_widget' => '<div class="glass-card rounded-xl p-6">',
-    'after_widget'  => '</div>',
+    'before_widget' => '',
+    'after_widget'  => '',
 ));
 ```
 
-### 2. Criar Template de Página Personalizado
+### 3. Criar Template de Página Personalizado
 
 Crie arquivo `page-minha-pagina.php`:
 
@@ -345,42 +286,12 @@ Crie arquivo `page-minha-pagina.php`:
 get_header();
 ?>
 
-<main class="custom-page">
-    <!-- Seu conteúdo aqui -->
-</main>
 
-<?php get_footer(); ?>
-```
+    
+    
 
-### 3. Adicionar Opção ao Customizer
 
-```php
-// No inc/customizer.php:
-$wp_customize->add_setting('minha_opcao', array(
-    'default' => 'Valor Padrão',
-    'sanitize_callback' => 'sanitize_text_field',
-));
 
-$wp_customize->add_control('minha_opcao', array(
-    'label' => 'Minha Opção',
-    'section' => 'cogitari_branding',
-    'type' => 'text',
-));
-```
-
-### 4. Customizar Hook WooCommerce
-
-Crie arquivo `/inc/woocommerce-hooks.php`:
-
-```php
-<?php
-// Alterar número de produtos relacionados
-add_filter('woocommerce_output_related_products_args', function($args) {
-    $args['posts_per_page'] = 6; // Padrão: 4
-    $args['columns'] = 3;         // Padrão: 4
-    return $args;
-});
-?>
 ```
 
 ---
@@ -392,7 +303,7 @@ add_filter('woocommerce_output_related_products_args', function($args) {
 1. **LCP (Largest Contentful Paint)**: < 2.5s
    - Imagens com lazy loading nativo
    - Preconnect para fontes Google
-   - CSS inline crítico
+   - CSS otimizado sem bloat
 
 2. **FID (First Input Delay)**: < 100ms
    - JavaScript carregado no rodapé
@@ -400,113 +311,185 @@ add_filter('woocommerce_output_related_products_args', function($args) {
 
 3. **CLS (Cumulative Layout Shift)**: < 0.1
    - Aspect-ratio definido para imagens
-   - Placeholders para AdSense
+   - Espaços reservados para ads
 
 ### Testar Performance
 
 ```bash
-# Lighthouse CI
+# Lighthouse CI (requer Node.js)
 npx lighthouse https://seusite.com --view
 
-# PageSpeed Insights
+# PageSpeed Insights (online)
 https://pagespeed.web.dev/analysis?url=https://seusite.com
 ```
 
 ---
 
-## 🛠️ Troubleshooting
+## 🌐 Internacionalização (i18n)
 
-### Problema: Elementor não carrega templates
+### Gerar Arquivo de Tradução
 
-**Solução:**
+```powershell
+# Requer WP-CLI instalado
+wp i18n make-pot . languages/cogitari.pot
+```
+
+### Traduzir com Poedit
+
+1. Baixe [Poedit](https://poedit.net/)
+2. Abra `languages/cogitari.pot`
+3. Traduza as strings
+4. Salve como `cogitari-pt_BR.po`
+5. Poedit gerará automaticamente `cogitari-pt_BR.mo`
+
+---
+
+## 🛡️ Segurança
+
+### Headers de Segurança Implementados
+
 ```php
-// Adicione no functions.php (já incluído na v5.1):
+// Já incluído no functions.php
+X-Content-Type-Options: nosniff
+X-Frame-Options: SAMEORIGIN
+X-XSS-Protection: 1; mode=block
+```
+
+### Boas Práticas Aplicadas
+
+- ✅ Escape de saída: `esc_html()`, `esc_url()`, `esc_attr()`
+- ✅ Sanitização de entrada: `sanitize_text_field()`
+- ✅ Nonces em formulários: `wp_nonce_field()`
+- ✅ Preparação de queries: WP_Query com arrays
+- ✅ Admin bar oculto para não-admins
+
+---
+
+## 🔌 Compatibilidade (Expansões Futuras)
+
+### Elementor (Requer configuração adicional)
+
+O tema possui estrutura preparada para Elementor, mas requer ativação manual:
+
+1. Instale o plugin Elementor
+2. Adicione ao `functions.php`:
+
+```php
+// Ativar suporte Elementor
+add_theme_support('elementor-header-footer');
+
 add_action('elementor/theme/register_locations', function($manager) {
     $manager->register_all_core_location();
 });
 ```
 
-### Problema: WooCommerce ainda com cores roxas
+3. Acesse: `Elementor > Theme Builder`
+4. Crie templates para Header, Footer, Single, Archive
 
-**Checklist:**
-- ✅ Arquivo `/woocommerce/woocommerce.css` existe?
-- ✅ Cache do navegador limpo?
-- ✅ Plugin de cache desabilitado temporariamente?
-- ✅ Força ctrl+F5 (hard refresh)
+### WooCommerce (Requer módulos adicionais)
 
-**Solução Manual:**
-```css
-/* Adicione ao final do style.css: */
-.woocommerce button.button {
-    background: linear-gradient(90deg, #2F80ED 0%, #7B42F6 100%) !important;
-}
+O tema está preparado para WooCommerce:
+
+1. Instale o plugin WooCommerce
+2. Adicione ao `functions.php`:
+
+```php
+// Ativar suporte WooCommerce
+add_theme_support('woocommerce');
+add_theme_support('wc-product-gallery-zoom');
+add_theme_support('wc-product-gallery-lightbox');
+add_theme_support('wc-product-gallery-slider');
 ```
 
-### Problema: Imagens não aparecem
+3. Crie arquivo `/woocommerce/woocommerce.css` com estilos customizados
+
+**Nota:** Para implementação completa de Elementor e WooCommerce, consulte os arquivos de referência no Project (documents 1-57) que contém código adicional necessário.
+
+---
+
+## 🛠️ Troubleshooting
+
+### Problema: Imagens da logo não aparecem
 
 **Solução:**
-Regenere thumbnails:
-```bash
-wp media regenerate --yes
-```
+1. Verifique se as imagens estão em `assets/images/`
+2. Nomes corretos: `cogitarilogo.png` e `cogitariwordmark.png`
+3. Limpe o cache: LiteSpeed Cache > Purge All
+4. Hard refresh: `Ctrl + F5`
 
-### Problema: AdSense não exibe
+### Problema: Menu não aparece
+
+**Solução:**
+1. Acesse: `Aparência > Menus`
+2. Crie um menu
+3. Atribua à localização "Menu Principal"
+4. Salve as alterações
+
+### Problema: Posts não aparecem na home
+
+**Solução:**
+1. Acesse: `Configurações > Leitura`
+2. Certifique-se que "Suas últimas publicações" está selecionado
+3. Crie pelo menos 1 post publicado
+
+### Problema: Comentários não funcionam
 
 **Checklist:**
-- ✅ Código do anúncio correto?
-- ✅ Site aprovado no AdSense?
-- ✅ Aguardou 24-48h após aprovação?
-- ✅ Testou em navegação anônima?
+- [ ] Comentários estão habilitados? (`Configurações > Discussão`)
+- [ ] O post permite comentários? (Editar post > Discussão)
+- [ ] Usuário está logado? (sistema requer login)
 
 ---
 
-## 📞 Suporte
+## 🐛 Reportar Problemas
 
-- **Email**: suporte@cogitatitec.com
-- **GitHub Issues**: [Reportar Problema](https://github.com/seu-usuario/cogitari-tec/issues)
-- **Documentação**: [Wiki do Projeto](https://github.com/seu-usuario/cogitari-tec/wiki)
+- **Email**: suporte@cogitari.com.br
+- **GitHub Issues**: (adicione link do repositório)
 
 ---
 
-## 📝 Changelog
+## 📜 Changelog
 
-### v5.1.0 HYBRID (2025-01-30)
-- ✅ **WooCommerce**: Suporte total + sobrescrita de estilos Midnight
-- ✅ **Elementor**: Hooks avançados para header/footer customizados
-- ✅ **Templates**: archive.php e page.php com detecção automática
-- ✅ **Containers Fluidos**: Compatibilidade com page builders
-- ✅ **Sidebar WooCommerce**: Área de widget específica para loja
+### v17.0 FINAL (2025-01-30)
+- ✅ **Consolidação Completa**: Merge de todas as versões anteriores
+- ✅ **Design UI/UX Refinado**: Glassmorphism Midnight 100% funcional
+- ✅ **Sistema de Comentários**: Rating com estrelas implementado
+- ✅ **Segurança Reforçada**: Headers, nonces, sanitização completa
+- ✅ **Performance Otimizada**: Core Web Vitals otimizado
+- ✅ **Internacionalização**: Text-domain 'cogitari' em todas as strings
+- ✅ **Código Limpo**: Remoção de código morto e comentários desnecessários
+
+### v16.0 (2025-01-29)
+- Sistema de discussão com avatar e rating
+- Layout de comentários refinado
+
+### v5.1 HYBRID (2025-01-28)
+- Suporte WooCommerce preparado
+- Hooks Elementor estruturados
+- Templates archive.php e page.php
 
 ### v5.0.0 (2025-01-28)
-- ✅ Conversão completa de HTMLs para WordPress
-- ✅ Sistema glassmorphism Midnight implementado
-- ✅ 5 áreas de widget AdSense estratégicas
-- ✅ Compatibilidade total com Elementor
-- ✅ Sistema de internacionalização (i18n)
-- ✅ Logo personalizada integrada
-- ✅ Performance otimizada (Core Web Vitals)
-
-### v4.2.0 (2025-01-15)
-- Base inicial do tema
-- Estrutura de arquivos PHP
+- Conversão completa de HTML para WordPress
+- Sistema glassmorphism Midnight implementado
+- Compatibilidade Elementor básica
 
 ---
 
-## 📜 Licença
+## 📄 Licença
 
 © 2025 Cogitari Tecnologia LTDA. Todos os direitos reservados.
 
-Este é um tema proprietário desenvolvido exclusivamente para **Cogitari Tec**. 
+Este é um tema proprietário desenvolvido exclusivamente para **Cogitari**. 
 Uso não autorizado é proibido.
 
 ---
 
 <div align="center">
 
-**Desenvolvido com ❤️ pela equipe Cogitari Tec**
+**Desenvolvido com ❤️ pela equipe Cogitari**
 
-[Site](https://cogitatitec.com) • [Blog](https://cogitatitec.com/blog) • [Loja](https://cogitatitec.com/loja) • [Contato](https://cogitatitec.com/contato)
+[Site](https://cogitari.com.br) • [Blog](https://cogitari.com.br/blog) • [Contato](https://cogitari.com.br/contato)
 
-**v5.1 HYBRID** | Elementor + WooCommerce Ready | SEO Optimized | AdSense Friendly
+**v17.0 FINAL** | SEO Optimized | Performance First | Mobile Ready
 
 </div>
