@@ -49,3 +49,30 @@ if (file_exists(get_template_directory() . '/inc/woocommerce-hooks.php')) {
 if (file_exists(get_template_directory() . '/inc/elementor-support.php')) {
     require get_template_directory() . '/inc/elementor-support.php';
 }
+
+// Classe Walker para Comentários Customizados
+class Cogitari_Walker_Comment extends Walker_Comment {
+    protected function html5_comment( \, \, \ ) {
+        \ = ( 'div' === \['style'] ) ? 'div' : 'li';
+        ?>
+        <<?php echo \; ?> id="comment-<?php comment_ID(); ?>" <?php comment_class( \->has_children ? 'parent' : '', \ ); ?>>
+            <div id="div-comment-<?php comment_ID(); ?>" class="comment-body">
+                <div class="comment-author vcard">
+                    <?php if ( 0 != \['avatar_size'] ) echo get_avatar( \, \['avatar_size'] ); ?>
+                    <?php printf( __( '<cite class="fn">%s</cite> <span class="says">says:</span>' ), get_comment_author_link() ); ?>
+                </div>
+                <div class="comment-meta commentmetadata"><a href="<?php echo esc_url( get_comment_link( \->comment_ID, \ ) ); ?>">
+                    <?php printf( __( '%1 at %2' ), get_comment_date(), get_comment_time() ); ?></a><?php edit_comment_link( __( '(Edit)' ), '  ', '' ); ?>
+                </div>
+                <?php if ( '0' == \->comment_approved ) : ?>
+                <em class="comment-awaiting-moderation"><?php _e( 'Your comment is awaiting moderation.' ); ?></em>
+                <br />
+                <?php endif; ?>
+                <?php comment_text(); ?>
+                <div class="reply">
+                    <?php comment_reply_link( array_merge( \, array( 'add_below' => 'div-comment', 'depth' => \, 'max_depth' => \['max_depth'] ) ) ); ?>
+                </div>
+            </div>
+        <?php
+    }
+}
