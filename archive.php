@@ -40,7 +40,7 @@ get_header();
                 <?php
                 global $wp_query;
                 printf(
-                    esc_html__('Mostrando %d de %d resultados', 'cogitari-tec'),
+                    esc_html__('Mostrando %d de %d resultados', 'cogitari'),
                     $wp_query->post_count,
                     $wp_query->found_posts
                 );
@@ -49,11 +49,11 @@ get_header();
             
             <!-- Ordenação -->
             <form method="get" class="flex items-center gap-2">
-                <label for="orderby" class="text-slate-400 text-sm"><?php esc_html_e('Ordenar:', 'cogitari-tec'); ?></label>
+                <label for="orderby" class="text-slate-400 text-sm"><?php esc_html_e('Ordenar:', 'cogitari'); ?></label>
                 <select name="orderby" id="orderby" class="bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-white text-sm" onchange="this.form.submit()">
-                    <option value="date" <?php selected(isset($_GET['orderby']) ? $_GET['orderby'] : '', 'date'); ?>><?php esc_html_e('Mais Recentes', 'cogitari-tec'); ?></option>
-                    <option value="title" <?php selected(isset($_GET['orderby']) ? $_GET['orderby'] : '', 'title'); ?>><?php esc_html_e('Título (A-Z)', 'cogitari-tec'); ?></option>
-                    <option value="comment_count" <?php selected(isset($_GET['orderby']) ? $_GET['orderby'] : '', 'comment_count'); ?>><?php esc_html_e('Mais Comentados', 'cogitari-tec'); ?></option>
+                    <option value="date" <?php selected(isset($_GET['orderby']) ? $_GET['orderby'] : '', 'date'); ?>><?php esc_html_e('Mais Recentes', 'cogitari'); ?></option>
+                    <option value="title" <?php selected(isset($_GET['orderby']) ? $_GET['orderby'] : '', 'title'); ?>><?php esc_html_e('Título (A-Z)', 'cogitari'); ?></option>
+                    <option value="comment_count" <?php selected(isset($_GET['orderby']) ? $_GET['orderby'] : '', 'comment_count'); ?>><?php esc_html_e('Mais Comentados', 'cogitari'); ?></option>
                 </select>
             </form>
         </div>
@@ -117,7 +117,7 @@ get_header();
                     if ($post_count % 6 == 0 && is_active_sidebar('adsense-feed')) :
                     ?>
                         <article class="glass-card rounded-2xl p-6 border-blue-500/20">
-                            <p class="text-xs text-slate-500 mb-3 text-center uppercase tracking-wide"><?php esc_html_e('Patrocinado', 'cogitari-tec'); ?></p>
+                            <p class="text-xs text-slate-500 mb-3 text-center uppercase tracking-wide"><?php esc_html_e('Patrocinado', 'cogitari'); ?></p>
                             <?php dynamic_sidebar('adsense-feed'); ?>
                         </article>
                     <?php endif; ?>
@@ -134,10 +134,10 @@ get_header();
             <!-- Nenhum Resultado -->
             <div class="glass-card rounded-2xl p-12 text-center">
                 <div class="text-6xl mb-6">🔍</div>
-                <h2 class="text-3xl font-bold text-white mb-4"><?php esc_html_e('Nenhum resultado encontrado', 'cogitari-tec'); ?></h2>
-                <p class="text-slate-400 mb-6"><?php esc_html_e('Tente ajustar seus filtros ou volte para a página inicial.', 'cogitari-tec'); ?></p>
+                <h2 class="text-3xl font-bold text-white mb-4"><?php esc_html_e('Nenhum resultado encontrado', 'cogitari'); ?></h2>
+                <p class="text-slate-400 mb-6"><?php esc_html_e('Tente ajustar seus filtros ou volte para a página inicial.', 'cogitari'); ?></p>
                 <a href="<?php echo home_url(); ?>" class="gradient-bg text-white px-6 py-3 rounded-full font-medium inline-block hover:opacity-90 transition">
-                    <?php esc_html_e('Voltar ao Início', 'cogitari-tec'); ?>
+                    <?php esc_html_e('Voltar ao Início', 'cogitari'); ?>
                 </a>
             </div>
         
