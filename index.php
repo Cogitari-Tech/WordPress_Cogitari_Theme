@@ -1,6 +1,4 @@
-## 5. `index.php` (FINAL)
-```php
-<?php
+﻿<?php
 /**
  * Index Template - Home Page
  * 
@@ -14,14 +12,14 @@ get_header();
 
     <?php if (is_home() || is_front_page()) : ?>
     <!-- Hero Section -->
-    <div class="hero-news glass glass-hover-effect" style="background: url('<?php echo esc_url(get_template_directory_uri() . '/assets/images/hero-bg.jpg'); ?>') no-repeat center center;">
+    <div class="hero-news glass glass-hover-effect" style="background: url('<?php echo esc_url(get_template_directory_uri() . '/'); ?>') no-repeat center center;">
         <div class="hero-content">
             <span class="tag-cat"><?php esc_html_e('Destaque', 'cogitari'); ?></span>
             <h1 style="font-size: clamp(2rem, 5vw, 3.5rem); max-width: 900px; text-shadow: 0 4px 20px rgba(0,0,0,0.9); margin-bottom: 20px; line-height: 1.1; font-weight: 800;">
-                <?php esc_html_e('O Futuro da', 'cogitari'); ?> <span class="text-gradient"><?php esc_html_e('Automação', 'cogitari'); ?></span> <?php esc_html_e('Começa Aqui', 'cogitari'); ?>
+                <?php esc_html_e('O Futuro da', 'cogitari'); ?> <span class="text-gradient"><?php esc_html_e('AutomaÃ§Ã£o', 'cogitari'); ?></span> <?php esc_html_e('ComeÃ§a Aqui', 'cogitari'); ?>
             </h1>
             <p style="color: #e2e8f0; max-width: 600px; font-size: 1.2rem; margin-bottom: 20px;">
-                <?php esc_html_e('Explore as últimas tendências em IA, automação e marketing digital.', 'cogitari'); ?>
+                <?php esc_html_e('Explore as Ãºltimas tendÃªncias em IA, automaÃ§Ã£o e marketing digital.', 'cogitari'); ?>
             </p>
         </div>
     </div>
@@ -41,7 +39,7 @@ get_header();
     <div class="trending-card glass glass-hover-effect">
         <div class="trending-thumb-container">
             <?php if (has_post_thumbnail()) : ?>
-                <?php the_post_thumbnail('cogitari-medium', array('alt' => get_the_title())); ?>
+                <?php the_post_thumbnail('cogitari-card', array('alt' => get_the_title())); ?>
             <?php else : ?>
                 <span class="trending-thumb-text">AI</span>
             <?php endif; ?>
@@ -69,7 +67,7 @@ get_header();
     ?>
     <?php endif; ?>
 
-    <h2 class="section-title"><?php esc_html_e('Últimas Atualizações', 'cogitari'); ?></h2>
+    <h2 class="section-title"><?php esc_html_e('Ãšltimas AtualizaÃ§Ãµes', 'cogitari'); ?></h2>
     
     <div class="news-grid">
         <?php 
@@ -109,9 +107,9 @@ get_header();
             <?php if ($count == 2) : ?>
                 <article class="news-card ad-slot-card glass">
                     <span class="ad-slot-label"><?php esc_html_e('Patrocinado', 'cogitari'); ?></span>
-                    <div class="ad-slot-rect"><?php esc_html_e('Anúncio 300x250', 'cogitari'); ?></div>
+                    <div class="ad-slot-rect"><?php esc_html_e('AnÃºncio 300x250', 'cogitari'); ?></div>
                     <h3 style="font-size: 1.1rem; font-weight: 700; color: white; margin-bottom: 10px;">
-                        <?php esc_html_e('Espaço Publicitário', 'cogitari'); ?>
+                        <?php esc_html_e('EspaÃ§o PublicitÃ¡rio', 'cogitari'); ?>
                     </h3>
                 </article>
             <?php endif; ?>
@@ -122,8 +120,8 @@ get_header();
             // Pagination
             the_posts_pagination(array(
                 'mid_size'  => 2,
-                'prev_text' => __('« Anterior', 'cogitari'),
-                'next_text' => __('Próximo »', 'cogitari'),
+                'prev_text' => __('Â« Anterior', 'cogitari'),
+                'next_text' => __('PrÃ³ximo Â»', 'cogitari'),
             ));
             
         else : 
@@ -137,4 +135,3 @@ get_header();
 </main>
 
 <?php get_footer(); ?>
-```

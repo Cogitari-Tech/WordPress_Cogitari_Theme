@@ -1,75 +1,64 @@
 ﻿<?php
 /**
- * Cogitari Portal - Functions
- * @package Cogitari
- * @version 17.0 FINAL
+ * Cogitari Functions - v24.0 FIXED
  */
-
 if (!defined('ABSPATH')) { exit; }
 
-// SETUP DO TEMA
-function cogitari_theme_setup() {
+// 1. SETUP
+function cogitari_setup() {
+    load_theme_textdomain('cogitari', get_template_directory() . '/languages');
     add_theme_support('title-tag');
     add_theme_support('post-thumbnails');
+    add_theme_support('custom-logo');
     add_theme_support('automatic-feed-links');
-    add_theme_support('html5', array('search-form', 'comment-form', 'comment-list', 'gallery', 'caption'));
-    add_theme_support('custom-logo', array('height' => 55, 'width' => 200, 'flex-height' => true, 'flex-width' => true));
-    register_nav_menus(array('primary' => esc_html__('Menu Principal', 'cogitari')));
-    add_image_size('cogitari-featured', 1200, 675, true);
+    register_nav_menus(array('primary' => 'Menu Principal'));
+    add_image_size('cogitari-card', 600, 400, true);
     add_image_size('cogitari-thumbnail', 400, 300, true);
 }
-add_action('after_setup_theme', 'cogitari_theme_setup');
+add_action('after_setup_theme', 'cogitari_setup');
 
-// SCRIPTS
+// 2. SCRIPTS
 function cogitari_scripts() {
-    wp_enqueue_style('cogitari-style', get_stylesheet_uri(), array(), '17.0');
-    wp_enqueue_style('cogitari-fonts', 'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap', array(), null);
+    // Versão 24.0 para limpar cache
+    wp_enqueue_style('cogitari-style', get_stylesheet_uri(), array(), '24.0');
     
-    if (file_exists(get_template_directory() . '/js/navigation.js')) {
-        wp_enqueue_script('cogitari-nav', get_template_directory_uri() . '/js/navigation.js', array(), '1.0', true);
+    if (file_exists(get_template_directory() . '/assets/css/woocommerce.css')) {
+        wp_enqueue_style('cogitari-woo', get_template_directory_uri() . '/assets/css/woocommerce.css', array(), '24.0');
     }
-    if (is_singular() && comments_open() && get_option('thread_comments')) {
-        wp_enqueue_script('comment-reply');
+
+    if (file_exists(get_template_directory() . '/assets/js/navigation.js')) {
+        wp_enqueue_script('cogitari-nav', get_template_directory_uri() . '/assets/js/navigation.js', array(), '24.0', true);
     }
 }
 add_action('wp_enqueue_scripts', 'cogitari_scripts');
 
-// INCLUDES (Verificação de segurança)
-if (file_exists(get_template_directory() . '/inc/template-tags.php')) require get_template_directory() . '/inc/template-tags.php';
-if (file_exists(get_template_directory() . '/inc/customizer.php')) require get_template_directory() . '/inc/customizer.php';
-if (file_exists(get_template_directory() . '/inc/woocommerce-hooks.php')) require get_template_directory() . '/inc/woocommerce-hooks.php';
-if (file_exists(get_template_directory() . '/inc/elementor-support.php')) require get_template_directory() . '/inc/elementor-support.php';
+// 3. INCLUDES
+$inc_files = array(
+    '/inc/template-tags.php',
+    '/inc/customizer.php',
+    '/inc/woocommerce-hooks.php',
+    '/inc/elementor-support.php'
+);
 
-// CLASSE WALKER PARA COMENTÁRIOS (Correção de Erro Fatal)
+foreach ($inc_files as $file) {
+    if (file_exists(get_template_directory() . $file)) {
+        require_once get_template_directory() . $file;
+    }
+}
+
+// 4. CLASSE WALKER (Necessária para comments.php)
 if (!class_exists('Cogitari_Walker_Comment')) {
     class Cogitari_Walker_Comment extends Walker_Comment {
-        protected function html5_comment( \, \, \ ) {
-            \ = ( 'div' === \['style'] ) ? 'div' : 'li';
+        protected function html5_comment($comment, $depth, $args) {
+            $tag = ('div' === $args['style']) ? 'div' : 'li';
             ?>
-            <<?php echo \; ?> id="comment-<?php comment_ID(); ?>" <?php comment_class( \->has_children ? 'parent' : '', \ ); ?>>
+            <<?php echo $tag; ?> id="comment-<?php comment_ID(); ?>" <?php comment_class($this->has_children ? 'parent' : '', $comment); ?>>
                 <div id="div-comment-<?php comment_ID(); ?>" class="comment-body">
                     <div class="comment-author vcard">
-                        <?php if ( 0 != \['avatar_size'] ) echo get_avatar( \, \['avatar_size'] ); ?>
-                        <?php printf( __( '<cite class="fn">%s</cite> <span class="says">diz:</span>', 'cogitari' ), get_comment_author_link() ); ?>
+                        <?php if (0 != $args['avatar_size']) echo get_avatar($comment, $args['avatar_size']); ?>
+                        <?php printf(__('<cite class="fn">%s</cite>', 'cogitari'), get_comment_author_link()); ?>
                     </div>
-                    <div class="comment-meta commentmetadata">
-                        <a href="<?php echo esc_url( get_comment_link( \->comment_ID, \ ) ); ?>">
-                            <?php printf( __( '%1 em %2', 'cogitari' ), get_comment_date(), get_comment_time() ); ?>
-                        </a>
-                        <?php edit_comment_link( __( '(Editar)', 'cogitari' ), '  ', '' ); ?>
-                    </div>
-                    <?php if ( '0' == \->comment_approved ) : ?>
-                        <em class="comment-awaiting-moderation"><?php _e( 'Seu comentário aguarda moderação.', 'cogitari' ); ?></em>
-                        <br />
-                    <?php endif; ?>
-                    
-                    <div class="comment-text">
-                        <?php comment_text(); ?>
-                    </div>
-                    
-                    <div class="reply">
-                        <?php comment_reply_link( array_merge( \, array( 'add_below' => 'div-comment', 'depth' => \, 'max_depth' => \['max_depth'] ) ) ); ?>
-                    </div>
+                    <div class="comment-text"><?php comment_text(); ?></div>
                 </div>
             <?php
         }

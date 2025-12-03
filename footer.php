@@ -1,5 +1,3 @@
-## 4. `footer.php` (FINAL)
-```php
 <footer class="site-footer">
     <div class="footer-content">
         <div class="footer-brand">
@@ -52,4 +50,3 @@
 <?php wp_footer(); ?>
 </body>
 </html>
-```

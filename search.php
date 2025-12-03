@@ -1,6 +1,6 @@
 <?php
 /**
- * Archive Template (Categorias, Tags, Autor)
+ * Search Results Template
  * 
  * @package Cogitari
  */
@@ -12,19 +12,25 @@ get_header();
 
 <main style="max-width: 1280px; margin: 0 auto; padding: 0 20px;">
 
-    <header class="archive-header" style="text-align: center; margin-bottom: 60px;">
-        <?php
-        the_archive_title('<h1 class="archive-title" style="font-size: 3rem; font-weight: 800; margin-bottom: 20px;">', '</h1>');
-        the_archive_description('<div class="archive-description" style="color: var(--text-grey); font-size: 1.1rem; max-w-3xl; margin: 0 auto;">', '</div>');
-        ?>
+    <header style="text-align: center; margin-bottom: 60px;">
+        <h1 style="font-size: 3rem; font-weight: 800; margin-bottom: 20px;">
+            <?php printf(esc_html__('Resultados para: %s', 'cogitari'), '<span class="text-gradient">' . get_search_query() . '</span>'); ?>
+        </h1>
+        <p style="color: var(--text-grey); font-size: 1.1rem;">
+            <?php
+            global $wp_query;
+            printf(
+                esc_html__('Encontrados %d resultados', 'cogitari'),
+                $wp_query->found_posts
+            );
+            ?>
+        </p>
     </header>
 
     <div class="news-grid">
         <?php 
         if (have_posts()) : 
-            $count = 0;
             while (have_posts()) : the_post(); 
-                $count++;
                 $categories = get_the_category();
         ?>
             <article class="news-card glass glass-hover-effect" onclick="window.location='<?php the_permalink(); ?>'" style="cursor: pointer;">
@@ -53,13 +59,6 @@ get_header();
                 </div>
             </article>
 
-            <?php if ($count % 6 == 0) : ?>
-                <article class="news-card ad-slot-card glass">
-                    <span class="ad-slot-label"><?php esc_html_e('Patrocinado', 'cogitari'); ?></span>
-                    <div class="ad-slot-rect"><?php esc_html_e('Anúncio 300x250', 'cogitari'); ?></div>
-                </article>
-            <?php endif; ?>
-
         <?php 
             endwhile;
             
@@ -71,12 +70,31 @@ get_header();
             
         else : 
         ?>
-            <p style="color:white; grid-column: 1 / -1; text-align: center;">
-                <?php esc_html_e('Nenhum post encontrado.', 'cogitari'); ?>
-            </p>
+            <div style="grid-column: 1 / -1;">
+                <div class="glass-card rounded-2xl p-12 text-center">
+                    <div style="font-size: 5rem; margin-bottom: 20px;">😔</div>
+                    <h2 style="font-size: 2rem; font-weight: 700; margin-bottom: 15px; color: white;">
+                        <?php esc_html_e('Nenhum resultado encontrado', 'cogitari'); ?>
+                    </h2>
+                    <p style="color: var(--text-grey); margin-bottom: 30px;">
+                        <?php esc_html_e('Tente buscar com outras palavras-chave.', 'cogitari'); ?>
+                    </p>
+                    <form role="search" method="get" action="<?php echo esc_url(home_url('/')); ?>" style="max-width: 500px; margin: 0 auto;">
+                        <input type="search" 
+                               name="s" 
+                               class="glass-input" 
+                               placeholder="<?php esc_attr_e('Digite sua busca...', 'cogitari'); ?>" 
+                               value="<?php echo get_search_query(); ?>">
+                        <button type="submit" class="btn-gradient" style="width: 100%; margin-top: 15px;">
+                            <?php esc_html_e('Buscar Novamente', 'cogitari'); ?>
+                        </button>
+                    </form>
+                </div>
+            </div>
         <?php endif; ?>
     </div>
     
 </main>
 
 <?php get_footer(); ?>
+```

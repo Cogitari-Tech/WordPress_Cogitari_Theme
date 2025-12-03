@@ -1,4 +1,10 @@
- # WordPress Core
+# ============================================
+# .gitignore - Tema Cogitari WordPress
+# ============================================
+
+# ============================================
+# WORDPRESS CORE (Não versionar)
+# ============================================
 /wp-admin/
 /wp-includes/
 wp-*.php
@@ -6,42 +12,233 @@ xmlrpc.php
 /license.txt
 /readme.html
 
-# Configurações
+# Configurações sensíveis
 wp-config.php
 .htaccess
 
-# Node Modules (se usar npm)
+# ============================================
+# NODE & NPM (Se usar build tools)
+# ============================================
 node_modules/
 package-lock.json
+npm-debug.log
+yarn.lock
+yarn-error.log
 
-# Dependências
+# ============================================
+# DEPENDÊNCIAS PHP (Composer)
+# ============================================
 /vendor/
 composer.lock
+composer.phar
 
-# Arquivos de Sistema
+# ============================================
+# ARQUIVOS DE SISTEMA
+# ============================================
+# macOS
 .DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Windows
 Thumbs.db
-*.log
-*.swp
-*.swo
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Linux
 *~
+.directory
+.Trash-*
 
-# IDEs
+# ============================================
+# IDEs E EDITORES
+# ============================================
+# Visual Studio Code
 .vscode/
-.idea/
-*.sublime-*
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
 
-# Arquivos Temporários
+# JetBrains (PhpStorm, WebStorm)
+.idea/
+*.iml
+*.iws
+*.ipr
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+.sublime-project
+.sublime-workspace
+
+# Atom
+.atom/
+
+# Eclipse
+.project
+.buildpath
+.settings/
+
+# ============================================
+# LOGS E TEMPORÁRIOS
+# ============================================
+*.log
 *.tmp
 *.bak
+*.swp
+*.swo
 *.cache
+*.pid
+*.seed
+*.pid.lock
 
-# Uploads (não versionar imagens de usuários)
+# Logs específicos
+error_log
+debug.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# ============================================
+# UPLOADS DO WORDPRESS (Não versionar)
+# ============================================
 /wp-content/uploads/
+/wp-content/upgrade/
+/wp-content/backup-db/
+/wp-content/backups/
+/wp-content/blogs.dir/
 
-# Plugins (opcional, versione apenas se customizou)
-# /wp-content/plugins/
+# ============================================
+# PLUGINS E TEMAS (Não versionar plugins externos)
+# ============================================
+# Versione apenas o tema Cogitari
+/wp-content/plugins/*
+!/wp-content/plugins/.gitkeep
 
-# Cache
+# Outros temas (se houver)
+/wp-content/themes/*
+!/wp-content/themes/cogitari/
+
+# ============================================
+# CACHE E OTIMIZAÇÃO
+# ============================================
 /wp-content/cache/
 /wp-content/w3tc-config/
+/wp-content/advanced-cache.php
+/wp-content/object-cache.php
+/wp-content/db.php
+
+# LiteSpeed Cache
+/wp-content/litespeed/
+
+# WP Rocket
+/wp-content/wp-rocket-config/
+
+# ============================================
+# ARQUIVOS DE BUILD E COMPILAÇÃO
+# ============================================
+# Sass/SCSS
+.sass-cache/
+*.css.map
+*.scss.map
+
+# Webpack
+/dist/
+/build/
+
+# ============================================
+# BACKUPS E DUMPS
+# ============================================
+*.sql
+*.sql.gz
+*.sql.zip
+*.db
+*.dump
+*.backup
+
+# ============================================
+# AMBIENTE E CONFIGURAÇÃO
+# ============================================
+.env
+.env.local
+.env.*.local
+.env.production
+.env.staging
+
+# ============================================
+# TESTES
+# ============================================
+/tests/
+/test-results/
+/.phpunit.result.cache
+/coverage/
+
+# ============================================
+# DOCUMENTAÇÃO GERADA
+# ============================================
+/docs/_build/
+/phpdoc/
+
+# ============================================
+# ARQUIVOS DIVERSOS
+# ============================================
+# Certificados SSL (não versionar)
+*.pem
+*.key
+*.crt
+*.csr
+
+# Arquivos de senha
+*.pwd
+*.passwd
+
+# Zip e compactados (para deploy manual)
+*.zip
+*.tar
+*.tar.gz
+*.rar
+*.7z
+
+# Exceto screenshot.png do tema
+!screenshot.png
+
+# ============================================
+# ESPECÍFICO DO TEMA COGITARI
+# ============================================
+# Versionar assets essenciais
+!/assets/
+!/assets/css/
+!/assets/js/
+!/assets/images/
+
+# Não versionar imagens grandes de desenvolvimento
+/assets/images/dev/
+/assets/images/temp/
+
+# Versionar arquivos de tradução compilados (.mo)
+!/languages/*.pot
+!/languages/*.po
+/languages/*.mo
+
+# ============================================
+# NOTAS IMPORTANTES
+# ============================================
+# Este .gitignore assume que você está versionando
+# APENAS o tema Cogitari dentro da instalação WordPress.
+# 
+# Se estiver versionando toda a instalação WP:
+# - Remova as linhas que excluem /wp-admin/, /wp-includes/
+# - Ajuste conforme necessário
+#
+# Para ignorar tudo EXCETO o tema Cogitari:
+# Coloque este .gitignore na raiz do WordPress
+# E adicione: /*
+# Depois: !/wp-content/
+# E assim por diante...
+# ============================================

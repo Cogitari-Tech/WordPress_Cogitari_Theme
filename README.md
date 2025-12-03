@@ -1,18 +1,19 @@
-# 🚀 Tema Cogitari v17.0 FINAL - WordPress Proprietário
+# 🚀 Tema Cogitari v17.2 FIXED - WordPress Proprietário
 
 ## 📋 Visão Geral
 
 Tema WordPress profissional desenvolvido para o portal de notícias **Cogitari**, focado em Automação, Inteligência Artificial e Marketing Digital.
 
-### ✨ Características v17.0 FINAL
+### ✨ Características v17.2 FIXED
 
 - ✅ **Design Glassmorphism Midnight**: Visual futurista com efeitos de vidro e gradientes azul→roxo
 - ✅ **100% Responsivo**: Mobile-first design adaptável para todos os dispositivos
 - ✅ **SEO Otimizado**: HTML5 semântico, Core Web Vitals otimizado
 - ✅ **Sistema de Comentários Avançado**: Rating com estrelas e layout moderno
 - ✅ **Performance**: Lazy loading, preconnect, CSS otimizado
-- ✅ **Internacionalização (i18n)**: Preparado para tradução em múltiplos idiomas
+- ✅ **Internacionalização (i18n)**: Text-domain `cogitari` em todas as strings
 - ✅ **Segurança**: Headers de segurança, nonces, sanitização completa
+- ✅ **Navigation.js**: Menu responsivo com smooth scroll e focus trap
 
 ### 🎯 Compatibilidade Futura (Preparado para expansão)
 
@@ -63,27 +64,50 @@ O tema está estruturado para suportar:
 
 ---
 
-## 📂 Estrutura do Tema (Atualizada)
+## 📂 Estrutura do Tema (v17.2 FIXED)
 
 ```
 cogitari/
 │
 ├── style.css                    # CSS principal com Design System
-├── functions.php                # v17.0 - Setup completo do tema
+├── functions.php                # v17.2 - Setup completo do tema
 ├── header.php                   # Cabeçalho glassmorphism + navegação
 ├── footer.php                   # Rodapé com widgets e redes sociais
 ├── index.php                    # Loop padrão de posts (Home)
+├── front-page.php               # Template da página inicial (Featured)
 ├── single.php                   # Template de post individual
+├── page.php                     # Template de página padrão
+├── archive.php                  # Template de arquivo (categorias/tags)
+├── search.php                   # Template de resultados de busca
+├── 404.php                      # Página de erro 404
 ├── comments.php                 # Sistema de comentários com rating
 ├── page-cadastro.php            # Template customizado de cadastro
+├── screenshot.png               # Preview do tema (1200x900px)
+├── .gitignore                   # Arquivos ignorados pelo Git
+├── README.md                    # Este arquivo
 │
 ├── assets/
+│   ├── css/
+│   │   └── woocommerce.css      # Estilos WooCommerce customizados
+│   ├── js/
+│   │   └── navigation.js        # ✅ Menu responsivo e smooth scroll
 │   └── images/
 │       ├── cogitarilogo.png     # Logo ícone (55x55px)
 │       ├── cogitariwordmark.png # Wordmark (200x50px)
 │       └── hero-bg.jpg          # Background hero section
 │
-└── screenshot.png               # Preview do tema (1200x900px)
+├── inc/
+│   ├── customizer.php           # Configurações do Customizer
+│   ├── template-tags.php        # Funções auxiliares de template
+│   ├── woocommerce-hooks.php    # Hooks WooCommerce
+│   └── elementor-support.php    # Suporte Elementor
+│
+├── template-parts/
+│   ├── content.php              # Loop de posts padrão
+│   └── content-none.php         # Mensagem "nenhum post encontrado"
+│
+└── languages/
+    └── cogitari.pot             # Arquivo de tradução base
 ```
 
 ---
@@ -92,10 +116,11 @@ cogitari/
 
 ### Pré-requisitos
 
-- WordPress 5.0+
+- WordPress 6.0+
 - PHP 7.4+
-- MySQL 5.6+
+- MySQL 5.7+
 - Hospedagem: Hostinger (recomendado)
+- Plugin: **LiteSpeed Cache** (gerenciamento de cache)
 
 ### Passo a Passo (Windows + PowerShell)
 
@@ -113,20 +138,29 @@ cd cogitari
 #### 2. Adicionar Arquivos do Tema
 
 Copie todos os arquivos PHP e CSS para a pasta `cogitari/`:
-- `style.css`
-- `functions.php`
-- `header.php`
-- `footer.php`
-- `index.php`
-- `single.php`
-- `comments.php`
-- `page-cadastro.php`
+- Todos os arquivos da raiz (`*.php`, `style.css`)
+- Pasta `assets/` completa
+- Pasta `inc/` completa
+- Pasta `template-parts/` completa
+- Pasta `languages/` completa
 
 #### 3. Criar Estrutura de Assets
 
 ```powershell
-# Criar pasta de imagens
-New-Item -ItemType Directory -Path "assets\images"
+# Verificar estrutura
+tree /F
+
+# Deve exibir:
+# cogitari/
+# ├── assets/
+# │   ├── css/
+# │   │   └── woocommerce.css
+# │   ├── js/
+# │   │   └── navigation.js
+# │   └── images/
+# │       ├── cogitarilogo.png
+# │       ├── cogitariwordmark.png
+# │       └── hero-bg.jpg
 ```
 
 **IMPORTANTE - Imagens da Logo:**
@@ -269,12 +303,19 @@ Edite `functions.php`, adicione após a linha 45:
 register_sidebar(array(
     'name'          => 'Minha Nova Área',
     'id'            => 'minha-area',
-    'before_widget' => '',
-    'after_widget'  => '',
+    'before_widget' => '<div class="widget-adsense">',
+    'after_widget'  => '</div>',
 ));
 ```
 
-### 3. Criar Template de Página Personalizado
+### 3. Customizar Navigation.js
+
+Edite `assets/js/navigation.js` para:
+- Alterar threshold do header scroll (linha 76)
+- Ativar hide/show header ao rolar (linha 81-85, descomentado)
+- Ajustar comportamento do menu mobile
+
+### 4. Criar Template de Página Personalizado
 
 Crie arquivo `page-minha-pagina.php`:
 
@@ -286,12 +327,17 @@ Crie arquivo `page-minha-pagina.php`:
 get_header();
 ?>
 
+<main class="custom-page">
+    <?php
+    if (have_posts()) :
+        while (have_posts()) : the_post();
+            the_content();
+        endwhile;
+    endif;
+    ?>
+</main>
 
-    
-    
-
-
-
+<?php get_footer(); ?>
 ```
 
 ---
@@ -308,10 +354,12 @@ get_header();
 2. **FID (First Input Delay)**: < 100ms
    - JavaScript carregado no rodapé
    - Event listeners otimizados
+   - Navigation.js assíncrono
 
 3. **CLS (Cumulative Layout Shift)**: < 0.1
    - Aspect-ratio definido para imagens
    - Espaços reservados para ads
+   - Menu com transições suaves
 
 ### Testar Performance
 
@@ -362,6 +410,7 @@ X-XSS-Protection: 1; mode=block
 - ✅ Nonces em formulários: `wp_nonce_field()`
 - ✅ Preparação de queries: WP_Query com arrays
 - ✅ Admin bar oculto para não-admins
+- ✅ Focus trap no menu mobile (navigation.js)
 
 ---
 
@@ -369,20 +418,10 @@ X-XSS-Protection: 1; mode=block
 
 ### Elementor (Requer configuração adicional)
 
-O tema possui estrutura preparada para Elementor, mas requer ativação manual:
+O tema possui estrutura preparada para Elementor:
 
 1. Instale o plugin Elementor
-2. Adicione ao `functions.php`:
-
-```php
-// Ativar suporte Elementor
-add_theme_support('elementor-header-footer');
-
-add_action('elementor/theme/register_locations', function($manager) {
-    $manager->register_all_core_location();
-});
-```
-
+2. O arquivo `/inc/elementor-support.php` já está pronto
 3. Acesse: `Elementor > Theme Builder`
 4. Crie templates para Header, Footer, Single, Archive
 
@@ -391,19 +430,9 @@ add_action('elementor/theme/register_locations', function($manager) {
 O tema está preparado para WooCommerce:
 
 1. Instale o plugin WooCommerce
-2. Adicione ao `functions.php`:
-
-```php
-// Ativar suporte WooCommerce
-add_theme_support('woocommerce');
-add_theme_support('wc-product-gallery-zoom');
-add_theme_support('wc-product-gallery-lightbox');
-add_theme_support('wc-product-gallery-slider');
-```
-
-3. Crie arquivo `/woocommerce/woocommerce.css` com estilos customizados
-
-**Nota:** Para implementação completa de Elementor e WooCommerce, consulte os arquivos de referência no Project (documents 1-57) que contém código adicional necessário.
+2. O arquivo `/inc/woocommerce-hooks.php` já está configurado
+3. Os estilos customizados estão em `/assets/css/woocommerce.css`
+4. Ative o suporte com `add_theme_support('woocommerce')`
 
 ---
 
@@ -424,6 +453,7 @@ add_theme_support('wc-product-gallery-slider');
 2. Crie um menu
 3. Atribua à localização "Menu Principal"
 4. Salve as alterações
+5. Verifique se `navigation.js` está carregando (F12 > Console)
 
 ### Problema: Posts não aparecem na home
 
@@ -439,16 +469,101 @@ add_theme_support('wc-product-gallery-slider');
 - [ ] O post permite comentários? (Editar post > Discussão)
 - [ ] Usuário está logado? (sistema requer login)
 
+### Problema: navigation.js não está funcionando
+
+**Debug:**
+1. Abra o Console do navegador (F12)
+2. Verifique se há erros JavaScript
+3. Confirme que o arquivo está sendo carregado:
+   ```javascript
+   // No console:
+   console.log('Navigation loaded');
+   ```
+4. Limpe o cache do LiteSpeed Cache
+5. Verifique se o caminho está correto no `functions.php`
+
 ---
 
-## 🐛 Reportar Problemas
+## 🧪 Testes e Validação
+
+### Checklist de Funcionalidades
+
+- [ ] **Header**: Logo, menu, busca funcionando
+- [ ] **Menu Mobile**: Hamburger abre/fecha corretamente
+- [ ] **Smooth Scroll**: Links âncora rolam suavemente
+- [ ] **Hero Section**: Imagem de fundo carregando
+- [ ] **Grid de Posts**: Cards exibindo corretamente
+- [ ] **Single Post**: Layout completo com comentários
+- [ ] **Comentários**: Rating com estrelas funcional
+- [ ] **Footer**: Links e widgets exibindo
+- [ ] **Responsivo**: Testado em mobile/tablet/desktop
+- [ ] **Performance**: LCP < 2.5s, FID < 100ms, CLS < 0.1
+
+### Ferramentas de Teste
+
+1. **Lighthouse** (DevTools do Chrome)
+2. **PageSpeed Insights** (online)
+3. **GTmetrix** (performance)
+4. **W3C Validator** (validação HTML)
+5. **Theme Check** (plugin WordPress)
+
+---
+
+## 🔄 Versionamento Git
+
+### Comandos Essenciais (PowerShell)
+
+```powershell
+# Inicializar repositório (primeira vez)
+git init
+git add .
+git commit -m "v17.2 FIXED - Adicionado navigation.js"
+
+# Adicionar remote (GitHub/GitLab)
+git remote add origin https://github.com/seu-usuario/cogitari.git
+
+# Push inicial
+git branch -M main
+git push -u origin main
+
+# Commits futuros
+git add .
+git commit -m "Descrição da mudança"
+git push
+
+# Ver status
+git status
+
+# Ver histórico
+git log --oneline
+```
+
+### Branches Recomendadas
+
+- `main`: Versão estável em produção
+- `dev`: Desenvolvimento ativo
+- `hotfix/*`: Correções urgentes
+- `feature/*`: Novas funcionalidades
+
+---
+
+## 📞 Suporte e Contato
 
 - **Email**: suporte@cogitari.com.br
-- **GitHub Issues**: (adicione link do repositório)
+- **Website**: [https://cogitari.com.br](https://cogitari.com.br)
+- **GitHub Issues**: [Link do repositório]
 
 ---
 
 ## 📜 Changelog
+
+### v17.2 FIXED (2025-12-02)
+- ✅ **Navigation.js Adicionado**: Menu responsivo completo
+- ✅ **Smooth Scroll**: Links âncora com rolagem suave
+- ✅ **Focus Trap**: Acessibilidade no menu mobile
+- ✅ **Header Scroll**: Comportamento ao rolar a página
+- ✅ **.gitignore Atualizado**: Estrutura correta para WordPress
+- ✅ **README.md Completo**: Documentação detalhada
 
 ### v17.0 FINAL (2025-01-30)
 - ✅ **Consolidação Completa**: Merge de todas as versões anteriores
@@ -490,6 +605,6 @@ Uso não autorizado é proibido.
 
 [Site](https://cogitari.com.br) • [Blog](https://cogitari.com.br/blog) • [Contato](https://cogitari.com.br/contato)
 
-**v17.0 FINAL** | SEO Optimized | Performance First | Mobile Ready
+**v17.2 FIXED** | Navigation Complete | SEO Optimized | Performance First | Mobile Ready
 
 </div>

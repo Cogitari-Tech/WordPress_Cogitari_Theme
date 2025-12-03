@@ -1,5 +1,3 @@
-## 6. `single.php` (FINAL)
-```php
 <?php
 /**
  * Single Post Template
@@ -126,4 +124,3 @@ get_header();
 </main>
 
 <?php get_footer(); ?>
-```
